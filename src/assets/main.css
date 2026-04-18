@@ -1,3 +1,6 @@
+@import '@fontsource/geist-sans/400.css';
+@import '@fontsource/geist-sans/500.css';
+@import '@fontsource/geist-sans/600.css';
 @import '@fontsource/inter/400.css';
 @import '@fontsource/inter/500.css';
 @import '@fontsource/inter/600.css';
@@ -6,32 +9,70 @@
 @tailwind components;
 @tailwind utilities;
 
+/* prompt.xml Design Token System — 單一來源供 CSS 與未來主題延伸 */
+:root {
+  --background-deep: #020203;
+  --background-base: #050506;
+  --background-elevated: #0a0a0c;
+  --surface: rgba(255, 255, 255, 0.05);
+  --surface-hover: rgba(255, 255, 255, 0.08);
+  --foreground: #ededef;
+  --foreground-muted: #8a8f98;
+  --foreground-subtle: rgba(255, 255, 255, 0.6);
+  --accent: #5e6ad2;
+  --accent-bright: #6872d9;
+  --accent-glow: rgba(94, 106, 210, 0.3);
+  --border-default: rgba(255, 255, 255, 0.06);
+  --border-hover: rgba(255, 255, 255, 0.1);
+  --border-accent: rgba(94, 106, 210, 0.3);
+  --bg-input: #0f0f12;
+  --ring-accent: rgba(94, 106, 210, 0.55);
+  --ease-expo-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 @layer base {
   html {
-    background-color: #050506;
-    color: #EDEDEF;
-    font-family: 'Inter', system-ui, sans-serif;
+    background-color: var(--background-base);
+    color: var(--foreground);
+    font-family: 'Geist Sans', 'Inter', system-ui, sans-serif;
+    font-size: max(0.9rem, 100%);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
   body {
     min-height: 100vh;
-    background-color: #050506;
+    background-color: var(--background-base);
+  }
+
+  #app {
+    min-height: 100vh;
+    background-color: transparent;
   }
 
   * {
     box-sizing: border-box;
   }
 
+  /* 隱藏 number 原生 spinner（由 AmountInput 自訂步進按鈕） */
+  input[type='number']::-webkit-outer-spin-button,
+  input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type='number'] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+  }
+
   :is(a, button, input, select, textarea, summary):focus-visible {
-    outline: 2px solid rgba(94, 106, 210, 0.55);
+    outline: 2px solid var(--ring-accent);
     outline-offset: 2px;
   }
 
   ::selection {
-    background-color: rgba(94, 106, 210, 0.3);
-    color: #EDEDEF;
+    background-color: var(--accent-glow);
+    color: var(--foreground);
   }
 
   ::-webkit-scrollbar {
@@ -39,7 +80,7 @@
     height: 6px;
   }
   ::-webkit-scrollbar-track {
-    background: #050506;
+    background: var(--background-base);
   }
   ::-webkit-scrollbar-thumb {
     background: rgba(255, 255, 255, 0.1);
@@ -51,6 +92,10 @@
 }
 
 @layer utilities {
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
   .text-gradient {
     background: linear-gradient(to bottom, #ffffff 0%, rgba(255,255,255,0.95) 50%, rgba(255,255,255,0.70) 100%);
     -webkit-background-clip: text;
@@ -87,7 +132,9 @@
   .animate-float,
   .animate-float-slow,
   .animate-shimmer,
-  .animate-pulse-glow {
+  .animate-pulse-glow,
+  .animate-marquee-seamless,
+  .text-gradient-accent {
     animation: none !important;
   }
 }

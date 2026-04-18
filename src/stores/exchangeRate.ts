@@ -6,31 +6,46 @@ import { CURRENCY_NAMES, POPULAR_CURRENCIES } from '@/types'
 
 const CACHE_TTL = 10 * 60 * 1000
 
+/**
+ * 即時匯率列表：快取、載入／錯誤狀態與重新抓取。
+ */
 export const useExchangeRateStore = defineStore('exchangeRate', () => {
   const cachedRates = ref<RatesResponse | null>(null)
   const isLoading = ref(false)
   const error = ref<string | null>(null)
 
-  const baseCurrency = 'USD'
+  /** 應用程式向使用者標示之基準幣（API 仍為 USD 報價時，列表改為每 1 TWD 兌他幣） */
+  const baseCurrency = 'TWD'
 
   const rateList = computed<ExchangeRate[]>(() => {
     if (!cachedRates.value) return []
-    return POPULAR_CURRENCIES
-      .filter(code => code !== 'USD')
-      .map(code => ({
-        code,
-        name: CURRENCY_NAMES[code] ?? code,
-        rate: cachedRates.value!.rates[code] ?? 0,
-      }))
+    const { rates } = cachedRates.value
+    const twdPerUsd = rates.TWD
+    if (twdPerUsd === undefined || twdPerUsd <= 0) return []
+
+    return POPULAR_CURRENCIES.filter(code => code !== 'TWD')
+      .map(code => {
+        const perUsd = code === 'USD' ? 1 : (rates[code] ?? 0)
+        return {
+          code,
+          name: CURRENCY_NAMES[code] ?? code,
+          rate: perUsd / twdPerUsd,
+        }
+      })
       .filter(r => r.rate > 0)
   })
 
-  function isCacheValid(): boolean {
+  const isCacheValid = (): boolean => {
     if (!cachedRates.value) return false
     return Date.now() - cachedRates.value.lastUpdated < CACHE_TTL
   }
 
-  async function fetchRates(force = false): Promise<void> {
+  /** 與換算 UI 同步基準幣選擇（API 仍固定 USD 報價時為預留擴充）。 */
+  const setBaseCurrency = (_code: string): void => {
+    void _code
+  }
+
+  const fetchRates = async (force = false): Promise<void> => {
     if (!force && isCacheValid()) return
 
     isLoading.value = true
@@ -52,5 +67,6 @@ export const useExchangeRateStore = defineStore('exchangeRate', () => {
     currentRates: cachedRates,
     rateList,
     fetchRates,
+    setBaseCurrency,
   }
 })

@@ -4,11 +4,21 @@ const BASE_URL = import.meta.env.DEV
   ? '/api/frankfurter'
   : 'https://api.frankfurter.app'
 
-export async function fetchHistoricalRates(
+const formatDate = (date: Date): string => date.toISOString().split('T')[0]
+
+/**
+ * 向 Frankfurter API 取得兩幣別於指定天數區間之日線匯率序列。
+ * @param base 基準幣代碼
+ * @param target 目標幣代碼
+ * @param days 回溯天數（7／30／90）
+ * @returns 排序後之歷史資料點
+ * @throws HTTP 或 JSON 解析失敗時
+ */
+export const fetchHistoricalRates = async (
   base: string,
   target: string,
-  days: TimeRange
-): Promise<HistoryData> {
+  days: TimeRange,
+): Promise<HistoryData> => {
   const endDate = new Date()
   const startDate = new Date()
   startDate.setDate(endDate.getDate() - days)
@@ -32,8 +42,4 @@ export async function fetchHistoricalRates(
     pair: { base, target },
     points,
   }
-}
-
-function formatDate(date: Date): string {
-  return date.toISOString().split('T')[0]
 }

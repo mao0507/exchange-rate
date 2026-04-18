@@ -5,6 +5,14 @@
       <!-- Base radial gradient -->
       <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,#0a0a0f_0%,#050506_50%,#020203_100%)]" />
 
+      <!-- Noise texture（prompt.xml Layer 2） -->
+      <svg class="absolute inset-0 h-full w-full opacity-[0.015]" xmlns="http://www.w3.org/2000/svg">
+        <filter id="prompt-noise">
+          <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch" />
+        </filter>
+        <rect width="100%" height="100%" filter="url(#prompt-noise)" />
+      </svg>
+
       <!-- Ambient blob 1: top-center indigo -->
       <div
         class="absolute -top-40 left-1/2 -translate-x-1/2 w-[900px] h-[600px]
@@ -26,9 +34,15 @@
         style="animation-delay: -2s"
       />
 
+      <!-- Bottom accent pulse（prompt.xml 第三層補光） -->
+      <div
+        class="absolute -bottom-32 left-1/3 w-[600px] h-[320px] rounded-full blur-[100px]
+               bg-[#5E6AD2] opacity-[0.08] animate-pulse-glow pointer-events-none"
+      />
+
       <!-- Grid overlay -->
       <div
-        class="absolute inset-0 opacity-[0.018]"
+        class="absolute inset-0 opacity-[0.02]"
         style="background-image: linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px),
                linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px);
                background-size: 64px 64px"
@@ -38,13 +52,18 @@
     <!-- Main content -->
     <div class="relative z-10 flex flex-col min-h-screen">
       <NavBar />
-      <main class="flex-1">
+      <main class="flex-1 pb-20 md:pb-0">
         <RouterView />
       </main>
+      <BottomNav />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import NavBar from '@/components/NavBar.vue'
+import BottomNav from '@/components/BottomNav.vue'
+import { useExchangeRatePoll } from '@/composables/useExchangeRatePoll'
+
+useExchangeRatePoll()
 </script>

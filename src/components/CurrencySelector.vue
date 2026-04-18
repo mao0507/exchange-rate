@@ -1,11 +1,8 @@
 <template>
-  <div class="relative">
+  <div class="group relative">
     <select
       :value="modelValue"
-      class="w-full appearance-none px-4 py-3 pr-9 rounded-lg text-sm text-fg
-             bg-bg-input border border-white/10
-             focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/20
-             transition-all duration-200 cursor-pointer"
+      :class="selectFieldMd"
       @change="$emit('update:modelValue', ($event.target as HTMLSelectElement).value)"
     >
       <option
@@ -17,13 +14,22 @@
         {{ code }} — {{ names[code] ?? code }}
       </option>
     </select>
-    <!-- Custom arrow -->
-    <span class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-fg-muted text-xs">▾</span>
+    <span
+      class="pointer-events-none absolute right-3 top-1/2 flex -translate-y-1/2 items-center justify-center
+             text-fg-muted transition-colors duration-200 ease-out
+             group-hover:text-fg/85 group-focus-within:text-accent motion-safe:origin-center
+             motion-safe:transition-transform motion-safe:duration-200 motion-safe:ease-out
+             motion-safe:group-focus-within:-rotate-180 motion-reduce:group-focus-within:rotate-0"
+    >
+      <SelectChevron />
+    </span>
   </div>
 </template>
 
 <script setup lang="ts">
 import { CURRENCY_NAMES, POPULAR_CURRENCIES } from '@/types'
+import { selectFieldMd } from '@/utils/selectFieldClasses'
+import SelectChevron from '@/components/SelectChevron.vue'
 
 defineProps<{ modelValue: string }>()
 defineEmits<{ 'update:modelValue': [value: string] }>()

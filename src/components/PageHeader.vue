@@ -1,5 +1,5 @@
 <template>
-  <div class="border-b border-white/[0.04] pb-6 mb-8">
+  <div class="border-b border-white/[0.06] pb-6 mb-8">
     <div :class="$slots.action ? 'flex justify-between items-start' : ''">
       <div>
         <p v-if="label" class="text-xs font-semibold uppercase tracking-widest text-accent mb-1">{{ label }}</p>

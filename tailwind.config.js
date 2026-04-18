@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['Geist Sans', 'Inter', 'system-ui', 'sans-serif'],
         mono: ['JetBrains Mono', 'Menlo', 'monospace'],
       },
       colors: {
@@ -32,6 +32,7 @@ export default {
         'float-slow': 'float 13s ease-in-out infinite',
         shimmer: 'shimmer 3s linear infinite',
         'pulse-glow': 'pulse-glow 2.5s ease-in-out infinite',
+        'marquee-seamless': 'marquee-seamless 40s linear infinite',
       },
       keyframes: {
         float: {
@@ -45,6 +46,10 @@ export default {
         'pulse-glow': {
           '0%,100%': { opacity: '0.6' },
           '50%':     { opacity: '1' },
+        },
+        'marquee-seamless': {
+          '0%':   { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
         },
       },
       backgroundSize: {

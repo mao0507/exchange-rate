@@ -1,5 +1,5 @@
 <template>
-  <PageShell>
+  <div>
     <PageHeader label="即時匯率" title="Exchange Rates" :subtitle="store.currentRates ? `更新於 ${lastUpdatedText}` : undefined">
       <template #action>
         <RefreshButton :loading="store.isLoading" @refresh="store.fetchRates(true)" />
@@ -10,7 +10,7 @@
       <div class="inline-flex items-center gap-2 px-3 py-2 rounded-full
                   border border-accent/30 bg-accent/[0.06] text-xs font-mono">
         <span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse-glow" />
-        <span class="text-accent">USD</span>
+        <span class="text-accent">{{ store.baseCurrency }}</span>
         <span class="text-fg-muted">基礎貨幣</span>
       </div>
       <div class="flex-1 max-w-sm">
@@ -29,14 +29,13 @@
       :rates="filteredRates"
       @select="navigateToHistory"
     />
-  </PageShell>
+  </div>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useExchangeRateStore } from '@/stores/exchangeRate'
-import PageShell from '@/components/PageShell.vue'
 import PageHeader from '@/components/PageHeader.vue'
 import ControlsBar from '@/components/ControlsBar.vue'
 import CurrencySearch from '@/components/CurrencySearch.vue'
@@ -64,7 +63,11 @@ const lastUpdatedText = computed(() => {
 })
 
 function navigateToHistory(code: string): void {
-  void router.push(`/history/USD-${code}`)
+  void router.push({
+    path: '/',
+    hash: '#history',
+    query: { pair: `${store.baseCurrency}-${code}` },
+  })
 }
 
 onMounted(() => void store.fetchRates())

@@ -7,7 +7,7 @@
 
     <div class="relative">
       <p class="text-xs font-mono tracking-widest text-fg-muted uppercase mb-3">換算結果</p>
-      <div class="text-3xl sm:text-4xl font-mono font-semibold text-gradient mb-3">
+      <div class="text-4xl sm:text-3xl font-mono font-semibold text-gradient mb-3">
         {{ formattedResult }}
       </div>
       <div class="text-sm text-fg-muted">

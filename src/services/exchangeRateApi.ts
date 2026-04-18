@@ -10,7 +10,12 @@ interface RterEntry {
   UTC: string
 }
 
-export async function fetchLatestRates(): Promise<RatesResponse> {
+/**
+ * 向 RTER API 取得最新熱門幣別對 USD 之匯率表。
+ * @returns 正規化後之 `RatesResponse`（base 固定為 USD）
+ * @throws 請求失敗或無法解析資料時
+ */
+export const fetchLatestRates = async (): Promise<RatesResponse> => {
   const res = await fetch(API_URL)
 
   if (!res.ok) {
