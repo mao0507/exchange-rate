@@ -8,7 +8,7 @@
 
     <ControlsBar>
       <div class="inline-flex items-center gap-2 px-3 py-2 rounded-full
-                  border border-accent/30 bg-accent/[0.06] text-xs font-mono">
+                  border border-accent/30 bg-accent/[0.06] text-sm font-mono md:text-xs">
         <span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse-glow" />
         <span class="text-accent">{{ store.baseCurrency }}</span>
         <span class="text-fg-muted">基礎貨幣</span>

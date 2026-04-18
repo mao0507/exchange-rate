@@ -12,7 +12,7 @@
       class="relative max-w-2xl mx-auto text-center will-change-transform"
       :style="heroMotionStyle"
     >
-      <p class="text-xs font-semibold uppercase tracking-widest text-accent mb-3 font-mono">即時匯率 · 換算 · 走勢</p>
+      <p class="text-sm font-semibold uppercase tracking-widest text-accent mb-3 font-mono md:text-xs">即時匯率 · 換算 · 走勢</p>
       <h1
         id="hero-heading"
         class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight mb-4 leading-tight"
@@ -26,7 +26,8 @@
         :to="{ path: '/', hash: '#rates' }"
         class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold
                bg-accent text-white hover:bg-accent-bright transition-all duration-200
-               shadow-glow hover:shadow-glow-hover active:scale-[0.98]"
+               shadow-glow hover:shadow-glow-hover active:scale-[0.98]
+               focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-bright focus-visible:ring-offset-2 focus-visible:ring-offset-bg-base"
       >
         查看匯率列表
         <span aria-hidden="true" class="text-base">↓</span>

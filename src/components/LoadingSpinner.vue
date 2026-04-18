@@ -5,6 +5,6 @@
       <div class="absolute inset-0 rounded-full border-2 border-transparent border-t-accent animate-spin" />
       <div class="absolute inset-2 rounded-full bg-accent/10 animate-pulse-glow" />
     </div>
-    <p class="text-xs text-fg-muted tracking-widest uppercase font-mono">Loading</p>
+    <p class="text-sm text-fg-muted tracking-widest uppercase font-mono md:text-xs">Loading</p>
   </div>
 </template>

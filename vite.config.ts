@@ -17,7 +17,7 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/api\/rter/, ''),
       },
       '/api/frankfurter': {
-        target: 'https://api.frankfurter.app',
+        target: 'https://api.frankfurter.dev',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api\/frankfurter/, ''),
       },

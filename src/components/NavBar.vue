@@ -6,7 +6,8 @@
     <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-4">
       <RouterLink
         to="/"
-        class="text-lg font-semibold tracking-tight shrink-0 hover:opacity-90 transition-opacity"
+        class="text-lg font-semibold tracking-tight shrink-0 hover:opacity-90 transition-opacity rounded-lg
+               focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-bg-base"
       >
         <span class="text-gradient-accent">ExRate</span>
       </RouterLink>
@@ -17,7 +18,8 @@
           v-for="link in links"
           :key="link.hash"
           :to="{ path: '/', hash: link.hash }"
-          class="px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200 text-fg-muted hover:text-fg hover:bg-white/[0.05]"
+          class="px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200 text-fg-muted hover:text-fg hover:bg-white/[0.05]
+                 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 focus-visible:ring-offset-2 focus-visible:ring-offset-bg-base"
           :class="isHashActive(link.hash) ? 'text-fg bg-white/[0.06]' : ''"
         >
           {{ link.label }}
@@ -27,7 +29,8 @@
       <!-- 手機：漢堡 -->
       <button
         type="button"
-        class="md:hidden flex flex-col justify-center gap-1.5 w-10 h-10 rounded-lg border border-white/[0.08] bg-white/[0.04] hover:bg-white/[0.08] transition-colors"
+        class="md:hidden flex flex-col justify-center gap-1.5 w-10 h-10 rounded-lg border border-white/[0.08] bg-white/[0.04] hover:bg-white/[0.08] transition-colors
+               focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-bg-base"
         :aria-expanded="isMenuOpen"
         aria-controls="mobile-nav-panel"
         aria-label="開啟選單"
@@ -52,7 +55,8 @@
             :key="`m-${link.hash}`"
             :to="{ path: '/', hash: link.hash }"
             class="block w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-colors
-                   text-fg-muted hover:text-fg hover:bg-white/[0.05]"
+                   text-fg-muted hover:text-fg hover:bg-white/[0.05]
+                   focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 focus-visible:ring-inset"
             :class="isHashActive(link.hash) ? 'text-fg bg-white/[0.06]' : ''"
             @click="closeMenu"
           >
@@ -65,12 +69,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, onMounted, onUnmounted } from 'vue'
+import { ref, watch, computed, inject, onMounted, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
+import { sectionSpyActiveKey } from '@/composables/useSectionSpy'
 
 const route = useRoute()
 const scrolled = ref(false)
 const isMenuOpen = ref(false)
+
+const scrollSpyHash = inject(sectionSpyActiveKey, ref(''))
 
 const links = [
   { hash: '#rates', label: '匯率列表' },
@@ -78,12 +85,15 @@ const links = [
   { hash: '#history', label: '歷史走勢' },
 ] as const
 
+/** 捲動偵測優先，否則退回 URL hash（點擊導覽或深連結） */
+const resolvedNavHash = computed(() => scrollSpyHash.value || route.hash)
+
 function handleScroll(): void {
   scrolled.value = window.scrollY > 10
 }
 
 function isHashActive(hash: string): boolean {
-  return route.hash === hash
+  return resolvedNavHash.value === hash
 }
 
 function closeMenu(): void {

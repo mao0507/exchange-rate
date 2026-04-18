@@ -3,7 +3,7 @@
     <button
       v-for="range in ranges"
       :key="range.value"
-      class="px-3 py-1.5 rounded-full text-xs font-mono font-medium transition-all duration-200"
+      class="min-h-[44px] min-w-[3rem] px-3 py-2 rounded-full text-sm font-mono font-medium transition-all duration-200 md:min-h-0 md:min-w-0 md:py-1.5 md:text-xs"
       :class="modelValue === range.value
         ? 'bg-accent text-white shadow-glow'
         : 'bg-white/[0.04] text-fg-muted border border-white/[0.08] hover:bg-white/[0.08] hover:text-fg hover:border-white/[0.15]'"

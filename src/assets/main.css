@@ -11,6 +11,16 @@
 
 /* prompt.xml Design Token System — 單一來源供 CSS 與未來主題延伸 */
 :root {
+  /* RGB 通道（供 Tailwind `rgb(var(--x) / <alpha>)` 使用） */
+  --color-bg-deep: 2 2 3;
+  --color-bg-base: 5 5 6;
+  --color-bg-elevated: 10 10 12;
+  --color-bg-input: 15 15 18;
+  --color-fg: 237 237 239;
+  --color-fg-muted: 138 143 152;
+  --color-accent: 94 106 210;
+  --color-accent-bright: 104 114 217;
+
   --background-deep: #020203;
   --background-base: #050506;
   --background-elevated: #0a0a0c;
@@ -28,6 +38,10 @@
   --bg-input: #0f0f12;
   --ring-accent: rgba(94, 106, 210, 0.55);
   --ease-expo-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 200ms;
+  --duration-mid: 300ms;
+  --shadow-card-token:
+    0 0 0 1px rgba(255, 255, 255, 0.06), 0 2px 20px rgba(0, 0, 0, 0.4), 0 0 40px rgba(0, 0, 0, 0.2);
 }
 
 @layer base {
@@ -136,5 +150,11 @@
   .animate-marquee-seamless,
   .text-gradient-accent {
     animation: none !important;
+  }
+
+  /* 降級：blob 仍保留位置，但不位移旋轉（與 App.vue 背景層一致） */
+  .animate-float,
+  .animate-float-slow {
+    transform: none !important;
   }
 }

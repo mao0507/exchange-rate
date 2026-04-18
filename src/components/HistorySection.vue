@@ -17,7 +17,7 @@
 
     <div
       class="relative rounded-2xl border border-white/[0.06] shadow-card backdrop-blur-sm p-0 sm:p-6 overflow-hidden
-             bg-gradient-to-b from-white/[0.08] to-bg-bg-elevated"
+             bg-gradient-to-b from-white/[0.08] to-bg-elevated"
     >
       <div
         class="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/15 to-transparent opacity-90"
@@ -29,7 +29,7 @@
             <span class="text-sm font-mono text-accent">{{ store.baseCurrency }}</span>
             <span class="text-fg-muted mx-1">/</span>
             <span class="text-sm font-mono text-fg">{{ store.targetCurrency }}</span>
-            <span class="text-xs text-fg-muted ml-3">近 {{ store.timeRange }} 天</span>
+            <span class="text-sm text-fg-muted ml-3 md:text-xs">近 {{ store.timeRange }} 天</span>
           </div>
         </div>
       </div>

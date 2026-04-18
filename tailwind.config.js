@@ -11,14 +11,15 @@ export default {
         mono: ['JetBrains Mono', 'Menlo', 'monospace'],
       },
       colors: {
-        'bg-deep':     '#020203',
-        'bg-base':     '#050506',
-        'bg-elevated': '#0a0a0c',
-        'bg-input':    '#0F0F12',
-        fg:            '#EDEDEF',
-        'fg-muted':    '#8A8F98',
-        accent:        '#5E6AD2',
-        'accent-bright': '#6872D9',
+        /* 對應 main.css :root，使用 rgb + alpha 以支援 bg-bg-base/80 等寫法 */
+        'bg-deep': 'rgb(var(--color-bg-deep) / <alpha-value>)',
+        'bg-base': 'rgb(var(--color-bg-base) / <alpha-value>)',
+        'bg-elevated': 'rgb(var(--color-bg-elevated) / <alpha-value>)',
+        'bg-input': 'rgb(var(--color-bg-input) / <alpha-value>)',
+        fg: 'rgb(var(--color-fg) / <alpha-value>)',
+        'fg-muted': 'rgb(var(--color-fg-muted) / <alpha-value>)',
+        accent: 'rgb(var(--color-accent) / <alpha-value>)',
+        'accent-bright': 'rgb(var(--color-accent-bright) / <alpha-value>)',
       },
       boxShadow: {
         card:      '0 0 0 1px rgba(255,255,255,0.06),0 2px 20px rgba(0,0,0,0.4),0 0 40px rgba(0,0,0,0.2)',

@@ -6,8 +6,8 @@
     <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(94,106,210,0.08)_0%,transparent_70%)] pointer-events-none" />
 
     <div class="relative">
-      <p class="text-xs font-mono tracking-widest text-fg-muted uppercase mb-3">換算結果</p>
-      <div class="text-4xl sm:text-3xl font-mono font-semibold text-gradient mb-3">
+      <p class="text-sm font-mono tracking-widest text-fg-muted uppercase mb-3 md:text-xs">換算結果</p>
+      <div class="text-3xl sm:text-4xl font-mono font-semibold text-gradient mb-3">
         {{ formattedResult }}
       </div>
       <div class="text-sm text-fg-muted">
@@ -16,7 +16,7 @@
         <span class="text-fg font-mono">{{ formattedRate }}</span>
         <span class="text-accent font-mono"> {{ toCurrency }}</span>
       </div>
-      <div v-if="lastUpdated" class="text-xs text-fg-muted/50 mt-2 font-mono">
+      <div v-if="lastUpdated" class="text-sm text-fg-muted/50 mt-2 font-mono md:text-xs">
         {{ lastUpdatedText }}
       </div>
     </div>

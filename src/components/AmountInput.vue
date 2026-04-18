@@ -45,7 +45,7 @@
         </button>
       </div>
     </div>
-    <p v-if="hasError" class="mt-1.5 text-xs text-red-400 font-mono">請輸入有效的數字金額</p>
+    <p v-if="hasError" class="mt-1.5 text-sm text-red-400 font-mono">請輸入有效的數字金額</p>
   </div>
 </template>
 

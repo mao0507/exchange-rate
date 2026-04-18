@@ -61,9 +61,14 @@
 </template>
 
 <script setup lang="ts">
+import { provide } from 'vue'
 import NavBar from '@/components/NavBar.vue'
 import BottomNav from '@/components/BottomNav.vue'
 import { useExchangeRatePoll } from '@/composables/useExchangeRatePoll'
+import { useHomeSectionSpy, sectionSpyActiveKey } from '@/composables/useSectionSpy'
 
 useExchangeRatePoll()
+
+const activeSectionHash = useHomeSectionSpy()
+provide(sectionSpyActiveKey, activeSectionHash)
 </script>

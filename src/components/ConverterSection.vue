@@ -20,20 +20,20 @@
 
       <div class="relative z-10 space-y-5">
         <div>
-          <label class="block text-xs font-mono tracking-widest text-fg-muted uppercase mb-2">金額</label>
+          <label class="block text-sm font-mono tracking-widest text-fg-muted uppercase mb-2 md:text-xs">金額</label>
           <AmountInput v-model="amount" />
         </div>
 
         <div class="flex flex-col gap-3 md:flex-row md:items-end">
           <div class="w-full md:flex-1">
-            <label class="block text-xs font-mono tracking-widest text-fg-muted uppercase mb-2">來源</label>
+            <label class="block text-sm font-mono tracking-widest text-fg-muted uppercase mb-2 md:text-xs">來源</label>
             <CurrencySelector :model-value="fromCurrency" @update:model-value="onFromChange" />
           </div>
           <div class="flex justify-center md:justify-start shrink-0 md:pt-5">
             <SwapButton @swap="swap" />
           </div>
           <div class="w-full md:flex-1">
-            <label class="block text-xs font-mono tracking-widest text-fg-muted uppercase mb-2">目標</label>
+            <label class="block text-sm font-mono tracking-widest text-fg-muted uppercase mb-2 md:text-xs">目標</label>
             <CurrencySelector v-model="toCurrency" />
           </div>
         </div>
