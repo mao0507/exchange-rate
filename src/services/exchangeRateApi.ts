@@ -1,10 +1,6 @@
 import type { RatesResponse } from '@/types'
 import { POPULAR_CURRENCIES } from '@/types'
 
-const API_URL = import.meta.env.DEV
-  ? '/api/rter/capi.php'
-  : 'https://tw.rter.info/capi.php'
-
 interface RterEntry {
   Exrate: number
   UTC: string
@@ -16,13 +12,13 @@ interface RterEntry {
  * @throws 請求失敗或無法解析資料時
  */
 export const fetchLatestRates = async (): Promise<RatesResponse> => {
-  const res = await fetch(API_URL)
+  const res = await fetch('https://tw.rter.info/capi.php')
 
   if (!res.ok) {
     throw new Error(`API 請求失敗：${res.status} ${res.statusText}`)
   }
 
-  const data = await res.json() as Record<string, RterEntry>
+  const data = (await res.json()) as Record<string, RterEntry>
 
   const rates: Record<string, number> = {}
   let utcTime = ''
@@ -39,7 +35,9 @@ export const fetchLatestRates = async (): Promise<RatesResponse> => {
     throw new Error('API 回傳資料格式異常，無法解析匯率')
   }
 
-  const lastUpdated = utcTime ? new Date(utcTime + ' UTC').getTime() : Date.now()
+  const lastUpdated = utcTime
+    ? new Date(utcTime + ' UTC').getTime()
+    : Date.now()
 
   return {
     base: 'USD',
