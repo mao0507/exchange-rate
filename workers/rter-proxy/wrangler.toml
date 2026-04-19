@@ -4,4 +4,5 @@ compatibility_date = "2024-11-01"
 
 # 部署後到 Cloudflare Dashboard 或使用 `wrangler vars put` 覆寫為你的 GitHub Pages 與本機開發來源
 [vars]
-ALLOWED_ORIGINS = "http://localhost:5173,https://YOUR_USER.github.io,https://YOUR_USER.github.io/YOUR_REPO"
+# 僅能填「Origin」（見 README）：協定 + 主機 + 埠，不要含路徑。GitHub Project Pages 仍是 https://<user>.github.io
+ALLOWED_ORIGINS = "http://localhost:5173,https://mao0507.github.io"

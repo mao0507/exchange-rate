@@ -4,7 +4,7 @@
  */
 
 export interface Env {
-  /** 逗號分隔，例如 `https://user.github.io,https://user.github.io/repo,http://localhost:5173`；含 `*` 則允許任意來源 */
+  /** 逗號分隔；每項須與瀏覽器 `Origin` 完全一致（僅 scheme+host+port，無路徑）。含 `*` 則允許任意來源 */
   ALLOWED_ORIGINS: string
 }
 
