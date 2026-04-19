@@ -45,8 +45,8 @@ jobs:
         run: pnpm build
         env:
           VITE_BASE: ${{ steps.base.outputs.vite_base }}
-          # 建議於 Repository variables 設定 VITE_RTER_LIVE_URL 為已部署之 Worker HTTPS URL（見 README）
-          VITE_RTER_LIVE_URL: ${{ vars.VITE_RTER_LIVE_URL }}
+          # Repository secret 或 variable 擇一（見 README）；secret 名稱：VITE_RTER_LIVE_URL
+          VITE_RTER_LIVE_URL: ${{ secrets.VITE_RTER_LIVE_URL || vars.VITE_RTER_LIVE_URL }}
 
       - uses: actions/upload-pages-artifact@v3
         with:
