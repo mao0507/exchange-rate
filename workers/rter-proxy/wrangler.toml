@@ -1,0 +1,7 @@
+name = "exchange-rate-rter-proxy"
+main = "src/index.ts"
+compatibility_date = "2024-11-01"
+
+# 部署後到 Cloudflare Dashboard 或使用 `wrangler vars put` 覆寫為你的 GitHub Pages 與本機開發來源
+[vars]
+ALLOWED_ORIGINS = "http://localhost:5173,https://YOUR_USER.github.io,https://YOUR_USER.github.io/YOUR_REPO"

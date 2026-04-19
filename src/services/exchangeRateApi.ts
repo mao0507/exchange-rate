@@ -1,6 +1,15 @@
 import type { RatesResponse } from '@/types'
 import { POPULAR_CURRENCIES } from '@/types'
 
+const RTER_DIRECT = 'https://tw.rter.info/capi.php'
+
+/** 開發：Vite proxy；生產：`VITE_RTER_LIVE_URL`（建議 Worker），未設定則直連 RTER（可能遭 CORS 擋） */
+function resolveRterFetchUrl(): string {
+  if (import.meta.env.DEV) return '/api/rter/capi.php'
+  const live = import.meta.env.VITE_RTER_LIVE_URL?.trim()
+  return live || RTER_DIRECT
+}
+
 interface RterEntry {
   Exrate: number
   UTC: string
@@ -12,7 +21,7 @@ interface RterEntry {
  * @throws 請求失敗或無法解析資料時
  */
 export const fetchLatestRates = async (): Promise<RatesResponse> => {
-  const res = await fetch('https://tw.rter.info/capi.php')
+  const res = await fetch(resolveRterFetchUrl())
 
   if (!res.ok) {
     throw new Error(`API 請求失敗：${res.status} ${res.statusText}`)
