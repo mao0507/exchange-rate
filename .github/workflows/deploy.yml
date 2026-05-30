@@ -47,6 +47,7 @@ jobs:
           VITE_BASE: ${{ steps.base.outputs.vite_base }}
           # Repository secret 或 variable 擇一（見 README）；secret 名稱：VITE_RTER_LIVE_URL
           VITE_RTER_LIVE_URL: ${{ secrets.VITE_RTER_LIVE_URL || vars.VITE_RTER_LIVE_URL }}
+          VITE_GA_ID: ${{ vars.VITE_GA_ID }}
 
       - uses: actions/upload-pages-artifact@v3
         with:
